@@ -1,0 +1,12 @@
+{{ define "main" }}
+<div class="wrapper home travelmap">
+  <section class="statement statement--page">
+    <div class="statement-seal" aria-hidden="true">{{ .Params.seal | default "旅" }}</div>
+    <div class="statement-body">
+      <h1 class="statement-lead statement-lead--page">{{ .Title }}</h1>
+      {{ with .Content }}<div class="statement-sub">{{ . }}</div>{{ end }}
+    </div>
+  </section>
+  {{ partial "home-map.html" . }}
+</div>
+{{ end }}

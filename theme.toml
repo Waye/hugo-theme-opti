@@ -1,0 +1,15 @@
+name = "Hugo Theme Opti"
+license = "MIT"
+licenselink = "https://github.com/Waye/hugo-theme-opti/blob/main/LICENSE"
+description = "Minimal Hugo blog theme with light and dark mode support"
+
+homepage = "https://github.com/Waye/hugo-theme-opti/"
+
+tags = ["blog", "responsive", "minimal", "dark", "light", "multilingual"]
+features = ["blog", "sass", "dark"]
+
+min_version = "0.87.0"
+
+[author]
+    name = "Weiyi Hu"
+    homepage = "https://github.com/Waye"

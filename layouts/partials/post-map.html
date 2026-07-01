@@ -1,0 +1,21 @@
+{{- $lat := .Params.lat -}}
+{{- $lng := .Params.lng -}}
+{{- $route := .Params.route -}}
+{{- $hasRoute := and $route (ge (len $route) 2) -}}
+{{- $hasPoint := and (ne $lat nil) (ne $lng nil) -}}
+{{- if or $hasRoute $hasPoint -}}
+{{- $location := .Params.location | default "" -}}
+<div class="post-map-wrap">
+  {{- with $location }}<p class="post-map-label">📍 {{ . }}</p>{{- end }}
+  <div id="post-map" class="post-map"
+       data-lat="{{ $lat }}" data-lng="{{ $lng }}" data-label="{{ $location }}"></div>
+</div>
+<script>
+window.MAP_I18N = {{ dict "read" (T "map.read" | default "Read &rarr;") "stop" (T "map.stop" | default "Stop") }};
+{{- with $route }}window.POST_ROUTE = {{ . }};{{- end }}
+</script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+{{- $js := resources.Get "js/post-map.js" | minify | fingerprint -}}
+<script src="{{ $js.RelPermalink }}"></script>
+{{- end -}}

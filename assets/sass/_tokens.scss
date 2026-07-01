@@ -1,0 +1,30 @@
+// ================= NIPPON COLORS palette =================
+// Every scheme: --washi (bg) + a concrete contrast colour --line (borders/cards/waves).
+// ALL TEXT is white (--text) on every scheme.
+:root {
+  --text:           #f4f2ea;        // near-white — ALL text, every scheme
+  --ink:            var(--text);
+  --ink-muted:      var(--text);
+  --ink-faint:      var(--text);
+  --hairline:       color-mix(in srgb, var(--line) 16%, var(--washi));
+  --washi-raise:    color-mix(in srgb, var(--washi) 93%, var(--line));
+  --bengara-active: color-mix(in srgb, var(--line) 78%, var(--washi));
+  --panel-bg:       var(--washi-raise);
+}
+@mixin nc($bg, $line) {
+  --washi: #{$bg};
+  --line: #{$line};
+  --bengara: #f4f2ea; --ai: #f4f2ea; --koke: #f4f2ea; --kincha: #f4f2ea; --map-accent: #{$line};
+}
+$nc-dark:  #1c1917;
+$nc-light: #f0ede6;
+:root      { @include nc(#d9cd90, $nc-dark); }
+html.dark  { @include nc(#0b1013, $nc-light); }
+@media (prefers-color-scheme: dark) { html:not(.light) { @include nc(#0b1013, $nc-light); } }
+html[data-scheme="entan"]         { @include nc(#d75455, $nc-dark); }   // 鉛丹
+html[data-scheme="mushikuri"]     { @include nc(#d9cd90, $nc-dark); }   // 蒸栗
+html[data-scheme="baikocha"]      { @include nc(#89916b, $nc-dark); }   // 梅幸茶
+html[data-scheme="tsuyukusa"]     { @include nc(#2ea9df, $nc-dark); }   // 露草
+html[data-scheme="noshimehana"]   { @include nc(#2b5f75, $nc-light); }  // 熨斗目花
+html[data-scheme="kenpohzome"]    { @include nc(#43341b, $nc-light); }  // 憲法染
+html[data-scheme="kurotsurubami"] { @include nc(#0b1013, $nc-light); }  // 黒橡

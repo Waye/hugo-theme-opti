@@ -1,0 +1,8 @@
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <a href="{{ .Site.Params.homeURL | default .Site.Home.Permalink }}" class="logo" aria-label="Home">
+            {{ partial "svgs/home.svg" (dict "height" 25 "width" 25) . }}
+        </a>
+        {{ partial "scheme-picker.html" . }}
+    </nav>
+</div>

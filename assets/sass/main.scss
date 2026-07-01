@@ -1,0 +1,108 @@
+//////////////// 1. Light Colors — 和紙 / 昼 /////////////////
+$text-base-color: var(--ink);   // sumi ink
+$text-link-blue: var(--ink);    // 弁柄 bengara (primary accent)
+$text-link-blue-active: var(--ink);
+$bloquote-border: var(--bengara);   // bengara left rule
+$blockquote-text: var(--ink-muted);   // ink-muted
+$inline-code-text: var(--ink);
+$inline-code-bg: var(--washi-raise);    // washi-raise
+$toc-bg: var(--washi-raise);
+$go-top-bg: var(--washi-raise);
+$go-top-bg-hover: var(--washi-raise);
+
+$black: var(--ink);             // sumi (headings / strong)
+$light: var(--washi-raise);            // washi-raise (borders, hr)
+$smoke: var(--hairline);            // hairline
+$gray: var(--ink-faint);            // ink-faint (meta)
+$white: var(--washi);           // 和紙 washi (page background)
+
+//////////////// 2. Dark Colors — 墨 / 夜 /////////////////
+$dark-text-base-color: #d9cfbb;  // muted rice
+$dark-text-link-blue: #c56a4f;   // bengara-d
+$dark-text-link-blue-active: #d98368;
+$dark-bloquote-border: #c56a4f;
+$dark-blockquote-text: #b4a893;
+$dark-inline-code-text: #d9cfbb;
+$dark-inline-code-bg: #24211c;   // sumi-raise
+$dark-toc-bg: #24211c;
+$dark-go-top-bg: #24211ccc;
+$dark-go-top-bg-hover: #24211c;
+
+$dark-black: #1b1916;           // 墨 sumi (page bg)
+$dark-white: #ece4d3;          // kozo white (headings)
+$dark-light: #3a352d;          // hairline-d
+$dark-smoke: #3a352d;
+$dark-gray: #8a7e6a;          // ink-faint-d
+
+//////////////// 3. Fonts — serif-first /////////////////
+$display-family: "Cormorant", "Zen Old Mincho", Georgia, "Times New Roman", serif;
+$mincho-family: "Zen Old Mincho", "Source Han Serif SC", "Songti SC", serif;
+$serif-body: "Noto Serif", "Source Han Serif SC", "Songti SC", Georgia, serif;
+$sans-family: $serif-body;   // body is serif now
+$mono-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, monospace;
+$base-font-size: 17px;
+$medium-font-size: $base-font-size * 0.875;
+$small-font-size: $base-font-size * 0.824;
+$base-line-height: 1.8;
+
+// Font weight
+$normal-weight: 400;
+$bold-weight: 700;
+
+//////////////// 4.Responsive design (media queries) /////////////////
+$wide-size: 890px;
+$narrow-size: 720px;
+
+// Padding unit
+$spacing-full: 30px;
+$spacing-half: $spacing-full / 2;
+
+// Screen sizes
+$on-mobile: 768px;
+$on-tablet: 769px;
+$on-desktop: 1024px;
+$on-widescreen: 1152px;
+
+@mixin media-query($device) {
+    @media screen and (max-width: $device) {
+        @content;
+    }
+}
+
+@mixin relative-font-size($ratio) {
+    font-size: $base-font-size * $ratio;
+}
+
+//////////////// 5. Import all sass files /////////////////
+
+@import "tokens";
+@import "fonts";
+@import "base";
+@import "navbar";
+@import "layout";
+@import "post";
+@import "code";
+
+@import "tableOfContent";
+@import "miscellaneous";
+@import "dark";
+@import "listpage";
+@import "custom";
+@import "maps";
+@import "timeline";
+@import "search";
+@import "home";
+@import "gallery";
+@import "wave";
+@import "article";
+@import "motion";
+@import "notices";
+@import "accent";
+
+{{ with .Site.Params.goToTop }}
+@import "goToTop";
+{{ end }}
+@import "shell";
+@import "tip";
+@import "gallery-page";
+@import "scheme";

@@ -1,0 +1,28 @@
+{{ define "main" }}
+<div class="wrapper post gallery-page">
+  <section class="statement statement--page">
+    <div class="statement-seal" aria-hidden="true">{{ .Params.seal | default "廊" }}</div>
+    <div class="statement-body">
+      <h1 class="statement-lead statement-lead--page">{{ .Title }}</h1>
+    </div>
+  </section>
+  {{- with .Content }}<div class="page-content gallery-intro">{{ . }}</div>{{ end -}}
+  {{- with .Site.Data.gallery -}}
+  <div class="gallery-grid">
+    {{- range . -}}
+    <figure class="gal-item">
+      {{- if .href -}}<a href="{{ .href }}" target="_blank" rel="noopener">{{- end -}}
+        <img src="{{ .src }}"{{ with .width }} width="{{ . }}"{{ end }}{{ with .height }} height="{{ . }}"{{ end }} alt="{{ .title | default "" }}" loading="lazy">
+      {{- if .href -}}</a>{{- end -}}
+      <figcaption class="gal-cap">
+        {{- with .title }}<span class="gal-title">{{ . }}</span>{{ end -}}
+        {{- $loc := .location -}}{{- $date := .date -}}
+        {{- if or $loc $date -}}<span class="gal-meta">{{ $loc }}{{ if and $loc $date }} · {{ end }}{{ $date }}</span>{{- end -}}
+        {{- with .caption }}<span class="gal-desc">{{ . }}</span>{{ end -}}
+      </figcaption>
+    </figure>
+    {{- end -}}
+  </div>
+  {{- end -}}
+</div>
+{{ end }}

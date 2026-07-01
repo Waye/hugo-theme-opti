@@ -1,0 +1,11 @@
+{{ define "main" }}
+<div class="wrapper post about-page">
+  <section class="statement statement--page">
+    <div class="statement-seal" aria-hidden="true">{{ .Params.seal | default "記" }}</div>
+    <div class="statement-body">
+      <h1 class="statement-lead statement-lead--page">{{ .Title }}</h1>
+    </div>
+  </section>
+  <div class="page-content">{{ .Content }}</div>
+</div>
+{{ end }}

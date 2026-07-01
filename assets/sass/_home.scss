@@ -1,0 +1,166 @@
+// ================= Home · 帖 (booklet index) =================
+.wrapper.home {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 0 24px clamp(48px, 8vw, 96px);
+}
+
+// ---- Statement (hero) ----
+.statement {
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(20px, 4vw, 48px);
+  padding: clamp(40px, 8vw, 96px) 0 clamp(30px, 5vw, 56px);
+}
+.statement-seal {
+  writing-mode: vertical-rl;
+  font-family: $mincho-family;
+  font-size: clamp(2.4rem, 6vw, 4.2rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.1em;
+  color: var(--ink);
+  opacity: 0.92;
+  flex-shrink: 0;
+}
+.statement-body { padding-top: 0.2em; }
+.statement-lead {
+  font-family: $display-family;
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(1.9rem, 4.2vw, 3rem);
+  line-height: 1.18;
+  color: var(--ink);
+  margin: 0;
+}
+.statement-sub {
+  font-family: $serif-body;
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--ink-muted);
+  margin: 1rem 0 0;
+  max-width: 48ch;
+}
+
+// ---- Category blocks (nippon colors) ----
+.cat-blocks {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+  margin: 0 0 clamp(36px, 6vw, 64px);
+}
+.cat-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 94px;
+  padding: 16px 18px;
+  border-radius: 6px;
+  border: 1px solid var(--hairline);
+  text-decoration: none;
+  transition: transform 0.12s ease;
+}
+.cat-block:hover { transform: translateY(-2px); }
+.cat-name {
+  font-family: $mincho-family;
+  font-size: 1.18rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+.cat-sub { font-size: 0.8rem; opacity: 0.72; margin-top: 3px; }
+
+.cat-bengara { background: color-mix(in srgb, var(--bengara) 13%, var(--washi)); color: var(--ink); border-color: color-mix(in srgb, var(--bengara) 24%, var(--washi)); }
+.cat-ai      { background: color-mix(in srgb, var(--ai) 13%, var(--washi));      color: var(--ai);      border-color: color-mix(in srgb, var(--ai) 24%, var(--washi)); }
+.cat-koke    { background: color-mix(in srgb, var(--koke) 14%, var(--washi));    color: var(--koke);    border-color: color-mix(in srgb, var(--koke) 26%, var(--washi)); }
+.cat-kincha  { background: color-mix(in srgb, var(--kincha) 14%, var(--washi));  color: var(--kincha);  border-color: color-mix(in srgb, var(--kincha) 26%, var(--washi)); }
+
+// ---- Section heads (shared: index, travel) ----
+.sec-head {
+  font-family: $display-family;
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: var(--ink);
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin: 0 0 1rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--hairline);
+}
+.sec-mincho {
+  font-family: $mincho-family;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+}
+
+// ---- Numbered index (编号目录) ----
+.index-section { margin: 0 0 clamp(40px, 7vw, 72px); }
+.index-list { counter-reset: idx; list-style: none; margin: 0; padding: 0; }
+.index-row { counter-increment: idx; border-bottom: 1px solid var(--hairline); }
+.index-row a {
+  display: flex;
+  align-items: baseline;
+  gap: 0.7rem;
+  padding: 0.78rem 0;
+  text-decoration: none;
+  color: var(--ink);
+}
+.index-row a::before {
+  content: counter(idx, decimal-leading-zero);
+  font-family: $mincho-family;
+  font-size: 0.9rem;
+  color: var(--ink-faint);
+  min-width: 2.4em;
+  flex-shrink: 0;
+}
+.index-title {
+  font-family: $display-family;
+  font-weight: 500;
+  font-size: 1.3rem;
+  color: var(--ink);
+  transition: color 0.12s ease;
+}
+.index-leader {
+  flex: 1;
+  min-width: 1rem;
+  border-bottom: 1px dotted var(--hairline);
+  transform: translateY(-0.25em);
+}
+.index-date {
+  font-family: $serif-body;
+  font-size: 0.85rem;
+  color: var(--ink-faint);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.index-row a:hover .index-title { color: var(--ink); }
+.index-all { margin: 1.2rem 0 0; }
+.index-all a {
+  font-family: $display-family;
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+@include media-query($on-mobile) {
+  .statement { flex-direction: column; gap: 14px; padding-top: 56px; }
+  .statement-seal { writing-mode: horizontal-tb; font-size: 2.4rem; }
+  .index-title { font-size: 1.12rem; }
+  .index-row a::before { min-width: 1.9em; }
+}
+
+// ---- Page-header statement (travel map, about) ----
+.statement--page {
+  padding: clamp(40px, 8vw, 84px) 0 clamp(18px, 3vw, 30px);
+  align-items: baseline;
+}
+.statement-lead--page {
+  font-style: normal;
+  font-weight: 600;
+  font-size: clamp(1.9rem, 4.5vw, 2.7rem);
+  margin: 0;
+}
+.about-page .page-content { padding-top: 1rem; }

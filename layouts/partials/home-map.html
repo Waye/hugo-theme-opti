@@ -1,0 +1,61 @@
+{{- $main := (where .Site.RegularPages "Type" "in" .Site.Params.mainSections).ByDate.Reverse -}}
+{{- $geo := slice -}}
+{{- range $main -}}
+  {{- $hasPoint := and (ne .Params.lat nil) (ne .Params.lng nil) -}}
+  {{- $hasRoute := and .Params.route (ge (len .Params.route) 1) -}}
+  {{- if or $hasPoint $hasRoute -}}
+    {{- $geo = $geo | append . -}}
+  {{- end -}}
+{{- end -}}
+{{- if $geo -}}
+{{- $geoData := slice -}}
+{{- $locCounts := dict -}}
+{{- range $geo -}}
+  {{- $lat := .Params.lat -}}
+  {{- $lng := .Params.lng -}}
+  {{- $route := .Params.route -}}
+  {{- if and (eq $lat nil) $route -}}
+    {{- $first := index $route 0 -}}
+    {{- $lat = $first.lat -}}
+    {{- $lng = $first.lng -}}
+  {{- end -}}
+  {{- $geoData = $geoData | append (dict "title" .Title "url" .RelPermalink "loc" (.Params.location | default "") "lat" $lat "lng" $lng "route" $route) -}}
+  {{- with .Params.location -}}
+    {{- $locCounts = merge $locCounts (dict . (add (index $locCounts . | default 0) 1)) -}}
+  {{- end -}}
+{{- end -}}
+<section class="geo-section" aria-label="Posts by location">
+  {{ if .IsHome }}<h3 class="sec-head"><span class="sec-mincho">旅</span> {{ T "home.explore_by_location" | default "Travel" }}</h3>{{ end }}
+  <div class="travel-stats" id="travel-stats" aria-label="Travel summary">
+    <div class="stat"><span class="stat-num" data-stat="places">0</span><span class="stat-label">Places</span></div>
+    <div class="stat"><span class="stat-num" data-stat="trips">0</span><span class="stat-label">Trips</span></div>
+    <div class="stat"><span class="stat-num" data-stat="countries">0</span><span class="stat-label">Countries</span></div>
+    <div class="stat"><span class="stat-num" data-stat="distance">0</span><span class="stat-label">km</span></div>
+  </div>
+  <div class="geo-controls">
+    <select id="geo-filter" aria-label="Filter posts by location">
+      <option value="">{{ T "home.all_locations" | default "All locations" }}</option>
+      {{- range $loc, $count := $locCounts }}
+      <option value="{{ $loc }}">{{ $loc }} ({{ $count }})</option>
+      {{- end }}
+    </select>
+    <button id="geo-reset" type="button">{{ T "home.reset" | default "Reset" }}</button>
+  </div>
+  <div id="home-map" class="home-map"></div>
+  <ul id="geo-post-list" class="geo-post-list">
+    {{- range $geo }}
+    <li class="geo-post-item" data-location="{{ .Params.location }}">
+      <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+      {{- with .Params.location }}<span class="geo-post-loc">{{ . }}</span>{{- end }}
+      {{- if and .Params.route (ge (len .Params.route) 2) }}<span class="geo-post-badge">🧭 {{ T "home.route" | default "route" }}</span>{{- end }}
+    </li>
+    {{- end }}
+  </ul>
+</section>
+<script>window.MAP_I18N = {{ dict "read" (T "map.read" | default "Read &rarr;") "stop" (T "map.stop" | default "Stop") }};</script>
+<script>window.GEO_DATA = {{ $geoData }};</script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+{{- $js := resources.Get "js/home-map.js" | minify | fingerprint -}}
+<script src="{{ $js.RelPermalink }}"></script>
+{{- end -}}

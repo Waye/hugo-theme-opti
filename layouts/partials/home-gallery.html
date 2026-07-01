@@ -1,0 +1,14 @@
+{{- $imgs := .Site.Params.homeImages | default slice -}}
+<aside class="home-gallery" aria-label="Photos"{{ if gt (len $imgs) 1 }} data-rotate="10000"{{ end }}>
+  {{- if $imgs -}}
+    {{- range $i, $p := $imgs -}}
+      {{- with resources.Get $p -}}
+        {{- $im := . -}}
+        {{- if gt .Width 1200 }}{{ $im = .Resize "1200x q82" }}{{ end -}}
+        <figure class="hg-slide{{ if eq $i 0 }} is-active{{ end }}"><img src="{{ $im.RelPermalink }}" loading="lazy" alt=""></figure>
+      {{- end -}}
+    {{- end -}}
+  {{- else -}}
+    <figure class="hg-slide is-active hg-ph" aria-hidden="true"><span>写真</span></figure>
+  {{- end -}}
+</aside>

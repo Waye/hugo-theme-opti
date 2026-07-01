@@ -1,0 +1,37 @@
+// ---- Timeline browser ----
+.timeline-section { margin: $spacing-full 0; }
+.tl-scope { display: flex; gap: 8px; margin-bottom: $spacing-half; }
+.tl-scope button {
+  font: inherit; padding: 4px 14px; border-radius: 6px;
+  border: 1px solid $smoke; background: transparent; color: inherit;
+  cursor: pointer; opacity: 0.6;
+  transition: opacity 0.15s, border-color 0.15s, color 0.15s;
+}
+.tl-scope button:hover { opacity: 1; }
+.tl-scope button.active { opacity: 1; border-color: var(--map-accent); color: var(--map-accent); }
+.tl-track {
+  position: relative; height: 36px; margin: 0.4rem 0 0.2rem;
+  cursor: pointer; touch-action: none;
+}
+.tl-line {
+  position: absolute; top: 50%; left: 0; right: 0; height: 2px;
+  background: $smoke; transform: translateY(-50%);
+}
+.tl-dot {
+  position: absolute; top: 50%; width: 8px; height: 8px; z-index: 1;
+  border-radius: 50%; background: $smoke; transform: translate(-50%, -50%);
+}
+.tl-handle {
+  position: absolute; top: 50%; left: 0; width: 18px; height: 18px; z-index: 2;
+  border-radius: 50%; background: var(--map-accent);
+  border: 3px solid #fff; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+  transform: translate(-50%, -50%); transition: left 0.12s ease;
+}
+.tl-label { font-weight: $bold-weight; margin: 0.3rem 0 $spacing-half; }
+.tl-list { list-style: none; padding: 0; margin: 0; }
+.tl-list li {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
+  padding: 7px 0; border-bottom: 1px solid $smoke;
+}
+.tl-date { opacity: 0.6; font-size: $small-font-size; white-space: nowrap; }
+.tl-empty { opacity: 0.5; border: none; }

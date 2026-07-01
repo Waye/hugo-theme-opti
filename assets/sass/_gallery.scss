@@ -1,0 +1,6 @@
+// ============ Home gallery carousel (slides fill the hero background layer) ============
+.hg-slide { position: absolute; inset: 0; margin: 0; opacity: 0; transition: opacity 1.1s ease; }
+.hg-slide.is-active { opacity: 1; }
+.hg-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hg-ph { position: absolute; inset: 0; background: var(--washi-raise); display: flex; align-items: center; justify-content: center; }
+.hg-ph span { font-family: $mincho-family; color: var(--ink-faint); font-size: 1.6rem; letter-spacing: 0.25em; }

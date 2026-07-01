@@ -1,0 +1,61 @@
+/* ---- Table of contents ---- */
+details { cursor: pointer; }
+
+.toc {
+  margin: 1.5rem 0;
+  border: 1px solid $smoke;
+  border-radius: 10px;
+  overflow: hidden;
+  background: transparent;
+}
+.toc > summary {
+  padding: 0.55rem 1rem;
+  font-size: $small-font-size;
+  font-weight: $bold-weight;
+  user-select: none;
+  outline: none;
+}
+.toc[open] > summary { border-bottom: 1px solid $smoke; }
+
+#TableOfContents {
+  padding: 0.6rem 0.5rem 0.7rem;
+  font-size: $small-font-size;
+}
+#TableOfContents ul { list-style: none; margin: 0; padding-left: 0.85rem; }
+#TableOfContents > ul { padding-left: 0; }
+#TableOfContents li { margin: 0; line-height: 1.5; }
+#TableOfContents a {
+  display: block;
+  padding: 0.18rem 0.6rem;
+  color: inherit;
+  opacity: 0.6;
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  transition: opacity 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+#TableOfContents a:hover { opacity: 1; }
+#TableOfContents a.active {
+  opacity: 1;
+  color: var(--map-accent);
+  font-weight: $bold-weight;
+  border-left-color: var(--map-accent);
+}
+
+/* ---- Reading progress bar ---- */
+.reading-progress {
+  position: fixed; top: 0; left: 0; width: 100%; height: 3px;
+  background: transparent; z-index: 50; pointer-events: none;
+}
+.reading-progress-bar {
+  height: 100%; width: 0;
+  background: var(--map-accent);
+  transition: width 0.1s linear;
+}
+
+/* ---- Anchor jump offset (mobile navbar is fixed at 50px) ---- */
+.post {
+  h1, h2, h3, h4, h5, h6 { scroll-margin-top: 1.5rem; }
+  @include media-query($on-mobile) {
+    h1, h2, h3, h4, h5, h6 { scroll-margin-top: 60px; }
+  }
+}

@@ -1,0 +1,38 @@
+// Navbar — minimal: home logo + dark-mode toggle only (inner pages)
+.navbar {
+  max-width: calc(#{$wide-size} - (#{$spacing-full} * 2));
+  max-width: -webkit-calc(#{$wide-size} - (#{$spacing-full} * 2));
+  margin: 0 auto;
+  padding: 0.5rem 0.3rem;
+}
+.menu {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1.3rem;
+  user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+
+  .logo {
+    display: inline-flex;
+    margin-left: 1rem;
+    > svg { opacity: 0.7; }
+    &:hover > svg { opacity: 1; }
+  }
+  a#mode {
+    opacity: 0.7;
+    cursor: pointer;
+    z-index: 1;
+    -webkit-transform: scale(1, 1);
+    transform: scale(1, 1);
+    &:hover { opacity: 1; }
+    &:active { -webkit-transform: scale(0.9, 0.9); transform: scale(0.9, 0.9); }
+    .mode-moon  { display: block; line { stroke: $black; fill: none; } circle { fill: $black; stroke: $black; } }
+    .mode-sunny { display: none;  line { stroke: $dark-white; fill: none; } circle { fill: none; stroke: $dark-white; } }
+  }
+  @include media-query($on-mobile) {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 2;
+    height: 50px; background-color: $white; border-bottom: 1px solid $light;
+  }
+}

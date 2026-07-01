@@ -1,0 +1,20 @@
+{{- $posts := (where .Site.RegularPages "Type" "in" .Site.Params.mainSections).ByDate.Reverse -}}
+{{- if $posts -}}
+<section class="index-section" aria-label="Recent posts">
+  <h3 class="sec-head"><span class="sec-mincho">最新</span> Recent Posts</h3>
+  <ol class="index-list">
+    {{- range first 3 $posts -}}
+    <li class="index-row">
+      <a href="{{ .RelPermalink }}">
+        <span class="index-title">{{ .Title }}</span>
+        <span class="index-leader" aria-hidden="true"></span>
+        <time class="index-date">{{ .Date.Format "Jan 2, 2006" }}</time>
+      </a>
+    </li>
+    {{- end -}}
+  </ol>
+  {{- range $s := (where .Site.Sections "Section" "in" (first 1 .Site.Params.mainSections)) -}}
+  <p class="index-all"><a href="{{ $s.Permalink }}">More posts →</a></p>
+  {{- end -}}
+</section>
+{{- end -}}

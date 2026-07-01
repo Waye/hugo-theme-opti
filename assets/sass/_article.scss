@@ -1,0 +1,96 @@
+// ================= Article / note page (washi) =================
+// Reading column inherits .wrapper (~660px) — a good measure.
+
+.header {
+  margin-top: clamp(3.5rem, 9vw, 6.5rem);
+
+  .header-title {
+    font-family: $display-family;
+    font-weight: 600;
+    font-size: clamp(2.1rem, 5vw, 2.9rem);
+    line-height: 1.14;
+    letter-spacing: 0.005em;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+}
+
+// Meta — mincho, faint
+.post-meta {
+  font-family: $mincho-family;
+  color: var(--ink-faint);
+  letter-spacing: 0.06em;
+  font-size: 0.92rem;
+}
+
+// In-content headings — a touch more presence for Cormorant
+.page-content {
+  h2 { @include relative-font-size(1.55); }
+  h3 { @include relative-font-size(1.32); }
+
+  // Links — bengara offset underline
+  a {
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    text-decoration-color: color-mix(in srgb, var(--ink) 42%, transparent);
+    transition: text-decoration-color 0.12s ease;
+
+    &:hover { color: var(--ink); text-decoration-color: var(--ink); }
+    &:focus { color: var(--ink); }
+  }
+
+  // Figures — hairline frame + mincho caption
+  figure {
+    margin: 1.9rem 0;
+
+    img {
+      border: 1px solid var(--hairline);
+      border-radius: 3px;
+    }
+
+    figcaption {
+      font-family: $mincho-family;
+      font-style: normal;
+      color: var(--ink-faint);
+      font-size: 0.85rem;
+      margin-top: 0.5rem;
+      text-align: center;
+    }
+  }
+}
+
+// Blockquote — 2px bengara rule, muted italic
+.page-content blockquote,
+blockquote {
+  border-left: 2px solid var(--bengara);
+  color: var(--ink-muted);
+  opacity: 1;
+  font-style: italic;
+  padding: 0 0 0 1.1rem;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+// hr — short centered hairline
+.page-content hr,
+hr {
+  border: 0;
+  border-top: 1px solid var(--hairline);
+  width: 84px;
+  margin: 2.6rem auto;
+}
+
+// TOC — washi-raise card, mincho heading
+.toc {
+  background: var(--washi-raise);
+  border: 1px solid var(--hairline);
+  border-radius: 6px;
+}
+.toc > summary {
+  font-family: $mincho-family;
+  letter-spacing: 0.06em;
+}
+.toc > summary b { font-weight: 500; }
+.toc[open] > summary { border-bottom-color: var(--hairline); }

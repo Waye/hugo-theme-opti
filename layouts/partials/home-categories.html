@@ -1,0 +1,12 @@
+{{- $colors := slice "bengara" "ai" "koke" "kincha" -}}
+{{- with .Site.Menus.main -}}
+<nav class="cat-blocks" aria-label="Sections">
+  {{- range $i, $m := . -}}
+  {{- $c := index $colors (mod $i 4) -}}
+  <a class="cat-block cat-{{ $c }}" href="{{ $m.URL }}">
+    <span class="cat-name">{{ $m.Name }}</span>
+    {{- with $m.Pre }}<span class="cat-sub">{{ . }}</span>{{ end -}}
+  </a>
+  {{- end -}}
+</nav>
+{{- end -}}

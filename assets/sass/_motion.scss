@@ -1,0 +1,68 @@
+// ================= Motion & interaction =================
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+a:focus-visible, button:focus-visible, input:focus-visible,
+summary:focus-visible, [tabindex]:focus-visible {
+  outline: 2px solid var(--bengara);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.cat-block {
+  transition: transform 0.18s ease, border-color 0.18s ease, background-color 0.18s ease;
+}
+.cat-block:hover { transform: translateY(-4px); }
+.cat-block:active { transform: translateY(-1px); }
+.cat-name { transition: letter-spacing 0.2s ease; }
+.cat-block:hover .cat-name { letter-spacing: 0.085em; }
+.cat-bengara:hover { background: color-mix(in srgb, var(--bengara) 20%, var(--washi)); border-color: var(--ink); }
+.cat-ai:hover      { background: color-mix(in srgb, var(--ai) 20%, var(--washi));      border-color: var(--ai); }
+.cat-koke:hover    { background: color-mix(in srgb, var(--koke) 22%, var(--washi));    border-color: var(--koke); }
+.cat-kincha:hover  { background: color-mix(in srgb, var(--kincha) 22%, var(--washi));  border-color: var(--kincha); }
+
+.index-row a { transition: padding-left 0.18s ease, background-color 0.18s ease; }
+.index-row:hover a {
+  padding-left: 0.5rem;
+  background-color: color-mix(in srgb, var(--bengara) 5%, transparent);
+}
+.index-row a::before { transition: color 0.18s ease; }
+.index-row:hover a::before { color: var(--ink); }
+.index-title { transition: color 0.18s ease; }
+
+.footer_social-icons a {
+  display: inline-flex;
+  color: var(--ink-faint);
+  transition: transform 0.18s ease, color 0.18s ease;
+}
+.footer_social-icons a:hover { transform: translateY(-3px); color: var(--ink); }
+
+.menu a#mode { transition: transform 0.25s ease, opacity 0.18s ease; }
+.menu a#mode:hover { transform: rotate(35deg); }
+
+.logo > svg { transition: opacity 0.18s ease, transform 0.18s ease; }
+.logo:hover > svg { transform: translateY(-1px); }
+#totop { transition: transform 0.18s ease, opacity 0.18s ease; }
+#totop:hover { transform: translateY(-3px); }
+
+#site-search { transition: border-color 0.18s ease, box-shadow 0.18s ease; }
+#site-search:focus { border-color: var(--ink); }
+.page-content a:active { opacity: 0.7; }
+
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: none; }
+}
+.statement     { animation: riseIn 0.6s ease both; }
+.cat-blocks    { animation: riseIn 0.6s ease 0.08s both; }
+.search-box    { animation: riseIn 0.6s ease 0.16s both; }
+.index-section { animation: riseIn 0.6s ease 0.24s both; }
+.geo-section   { animation: riseIn 0.6s ease 0.32s both; }
+.header        { animation: riseIn 0.6s ease both; }
+.page-content  { animation: riseIn 0.6s ease 0.12s both; }

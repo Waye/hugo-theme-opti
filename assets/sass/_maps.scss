@@ -1,0 +1,74 @@
+// ---- Location maps (Leaflet) ----
+.post-map-wrap { margin: $spacing-full 0; }
+.post-map-label { font-weight: $bold-weight; margin-bottom: $spacing-half; }
+.post-map { height: 280px; }
+.geo-section { margin: $spacing-full 0; }
+.geo-controls {
+  display: flex; flex-wrap: wrap; gap: 12px;
+  align-items: center; margin-bottom: $spacing-half;
+}
+#geo-filter, #geo-reset {
+  font: inherit; padding: 6px 12px; border-radius: 6px;
+  border: 1px solid $smoke; background: transparent; color: inherit; cursor: pointer;
+}
+.home-map { height: 360px; }
+.post-map, .home-map {
+  width: 100%; border-radius: 8px; position: relative;
+  z-index: 0; border: 1px solid $smoke;
+}
+.geo-post-list {
+  list-style: none; padding: 0; margin: $spacing-half 0 0; display: none;
+  &.active { display: block; }
+}
+.geo-post-item {
+  padding: 8px 0; border-bottom: 1px solid $smoke;
+  .geo-post-loc { opacity: 0.65; font-size: $small-font-size; margin-left: 8px; }
+}
+.route-line { stroke: var(--map-accent); }
+.route-pin {
+  background: var(--map-accent); color: #fff; border-radius: 50%;
+  width: 26px; height: 26px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: $bold-weight; font-size: 13px;
+  border: 2px solid #fff; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+.geo-post-badge {
+  font-size: $small-font-size; margin-left: 8px;
+  padding: 1px 7px; border-radius: 10px;
+  border: 1px solid $smoke; opacity: 0.8;
+}
+.route-arrow {
+  background: none; border: none; color: var(--map-accent);
+  display: flex; align-items: center; justify-content: center;
+}
+.route-arrow span { display: inline-block; line-height: 0; }
+
+@mixin map-controls-dark {
+  .leaflet-bar a,
+  .leaflet-control-layers {
+    background: #{$dark-light};
+    color: #{$dark-white};
+    border-color: #{$dark-smoke};
+  }
+  .leaflet-bar a { color: #{$dark-white}; }
+  .leaflet-bar a:hover { background: #{$dark-smoke}; }
+}
+html.dark { @include map-controls-dark; }
+@media (prefers-color-scheme: dark) {
+  html:not(.light) { @include map-controls-dark; }
+}
+.leaflet-control-layers label { margin: 2px 0; font: inherit; }
+.leaflet-control-layers-selector { margin-right: 6px; }
+
+// Travel stats panel
+.travel-stats {
+  display: flex; flex-wrap: wrap; gap: $spacing-half;
+  margin: $spacing-half 0 $spacing-full; padding: $spacing-half 0;
+  border-top: 1px solid $smoke; border-bottom: 1px solid $smoke;
+}
+.travel-stats .stat { flex: 1 1 auto; min-width: 64px; text-align: center; }
+.travel-stats .stat-num {
+  display: block; font-size: 1.7rem; font-weight: $bold-weight;
+  line-height: 1.15; color: var(--map-accent);
+}
+.travel-stats .stat-label { font-size: $small-font-size; opacity: 0.65; }

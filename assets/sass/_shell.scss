@@ -1,0 +1,138 @@
+// ============ Home shell · rail | main (image sits behind the copy) ============
+.home-shell { width: 100%; }
+
+.home-hero {
+  display: grid;
+  grid-template-columns: minmax(120px, 156px) 1fr;
+  min-height: clamp(520px, 88vh, 820px);
+  align-items: stretch;
+}
+
+// ---------- Left rail (shared with inner pages) ----------
+.home-rail {
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--hairline);
+  padding: clamp(22px, 3vw, 38px) clamp(14px, 1.6vw, 22px) clamp(22px, 3vw, 38px) clamp(18px, 2.4vw, 34px);
+}
+.rail-nav { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+.home-rail .cat-blocks { display: flex; flex-direction: column; gap: clamp(16px, 2.8vh, 30px); margin: 0; }
+.rail-bottom { display: flex; align-items: center; padding-top: clamp(18px, 3vh, 30px); }
+
+.home-rail .cat-block {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: -webkit-fit-content;
+  width: fit-content;
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: 0;
+  color: var(--ink);
+  opacity: 0.72;
+  cursor: pointer;
+  text-decoration: none;
+  transition: opacity 0.18s ease;
+}
+.home-rail .cat-block:hover { opacity: 1; }
+.home-rail .cat-block:active { transform: none; }
+
+.home-rail .cat-name {
+  position: relative;
+  font-family: $mincho-family;
+  font-size: 1.04rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  padding-bottom: 4px;
+}
+.home-rail .cat-name::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 100%; height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.24s ease;
+}
+.home-rail .cat-block:hover .cat-name::after,
+.home-rail .cat-block:focus-visible .cat-name::after { transform: scaleX(1); }
+
+// ---------- Main: full-bleed image behind ALL the copy ----------
+.home-hero-main {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-start;
+  padding: clamp(30px, 5vw, 68px) clamp(28px, 4vw, 60px);
+}
+.home-hero .home-gallery {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  height: 100%;
+  min-height: 0;
+  border-radius: 0;
+}
+// scrim over the image: heaviest at 家 (left, so white copy reads), fading to clear on the right
+.home-hero-main::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(to right,
+    color-mix(in srgb, var(--washi) 74%, transparent) 0%,
+    color-mix(in srgb, var(--washi) 56%, transparent) 32%,
+    color-mix(in srgb, var(--washi) 28%, transparent) 56%,
+    transparent 74%);
+}
+.hero-copy {
+  position: relative;
+  z-index: 2;
+  max-width: 46rem;
+  width: 100%;
+}
+.hero-copy .statement { padding: 0; }
+
+// stacked under the intro: search · recent posts · notices
+.home-stack { margin-top: clamp(36px, 5vw, 60px); }
+.home-stack > * + * { margin-top: clamp(34px, 5vw, 56px); }
+.home-stack .index-section,
+.home-stack .notices,
+.home-stack .search-box { max-width: none; margin-left: 0; margin-right: 0; }
+.home-stack .index-section { margin-top: clamp(34px, 5vw, 56px); margin-bottom: 0; }
+.home-stack .notices { margin-top: clamp(34px, 5vw, 56px); }
+.home-stack .footer { margin: clamp(44px, 6vw, 72px) 0 0; text-align: left; }
+
+// ============ Inner-page shell: sticky left rail + content ============
+.page-shell {
+  display: grid;
+  grid-template-columns: minmax(120px, 156px) 1fr;
+  align-items: start;
+}
+.page-rail { position: sticky; top: 0; height: 100vh; }
+.page-body { min-width: 0; }
+
+// ============ Mobile: collapse to a single column ============
+@include media-query($on-mobile) {
+  .home-hero,
+  .page-shell { grid-template-columns: 1fr; }
+  .home-hero { min-height: 0; }
+
+  .home-rail { border-right: none; border-bottom: 1px solid var(--hairline); padding: 16px 20px 18px; }
+  .page-rail { position: static; height: auto; }
+  .rail-nav { justify-content: flex-start; }
+  .home-rail .cat-blocks { flex-direction: row; flex-wrap: wrap; gap: 20px; }
+  .rail-bottom { padding-top: 14px; }
+
+  .home-hero-main { min-height: 0; padding: 26px 20px 40px; flex-direction: column; }
+  .home-hero-main::before { display: none; }
+  .home-hero .home-gallery {
+    position: relative; inset: auto; width: 100%; height: 180px; order: -1; margin-bottom: 22px;
+    -webkit-mask-image: none; mask-image: none;
+  }
+  .hero-copy { max-width: none; }
+  .home-stack { margin-top: 30px; }
+}

@@ -1,0 +1,16 @@
+// ===== Wave transition overlay =====
+html.wave-incoming::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 99998;
+  background: var(--wave-color, #8f3a28);
+}
+#wave-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 99999;
+  pointer-events: none;
+}

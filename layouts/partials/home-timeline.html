@@ -1,0 +1,23 @@
+{{- $main := (where .Site.RegularPages "Type" "in" .Site.Params.mainSections).ByDate.Reverse -}}
+{{- if $main -}}
+{{- $tl := slice -}}
+{{- range $main -}}
+  {{- $tl = $tl | append (dict "title" .Title "url" .RelPermalink "date" (.Date.Format "2006-01-02")) -}}
+{{- end -}}
+<section class="timeline-section" id="tl-section" aria-label="Timeline">
+  <h3 class="posts-item-note">📅 {{ T "home.timeline" | default "Timeline" }}</h3>
+  <div class="tl-scope">
+    <button type="button" data-scope="year" class="active">{{ T "home.by_year" | default "Year" }}</button>
+    <button type="button" data-scope="month">{{ T "home.by_month" | default "Month" }}</button>
+  </div>
+  <div class="tl-track" id="tl-track">
+    <div class="tl-line"></div>
+    <div class="tl-handle" id="tl-handle"></div>
+  </div>
+  <div class="tl-label" id="tl-label"></div>
+  <ul class="tl-list" id="tl-list"></ul>
+</section>
+<script>window.POSTS_TIMELINE = {{ $tl }};</script>
+{{- $js := resources.Get "js/home-timeline.js" | minify | fingerprint -}}
+<script src="{{ $js.RelPermalink }}"></script>
+{{- end -}}

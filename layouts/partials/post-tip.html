@@ -1,0 +1,20 @@
+{{- $t := .Site.Params.tip -}}
+{{- if and $t $t.enable -}}
+<section class="tip-jar" aria-label="Support">
+  <p class="tip-lead">打赏 · 请我喝杯咖啡</p>
+  <p class="tip-sub">你的支持会让我更有动力创造更多内容。<span>Buy me a coffee — your support keeps new posts coming.</span></p>
+  <div class="tip-methods">
+    {{- with $t.wechat }}{{ with resources.Get . }}
+    <figure class="tip-qr"><img src="{{ (.Resize "420x").RelPermalink }}" alt="WeChat Pay" loading="lazy"><figcaption>微信 WeChat</figcaption></figure>
+    {{ end }}{{ end -}}
+    {{- with $t.alipay }}{{ with resources.Get . }}
+    <figure class="tip-qr"><img src="{{ (.Resize "420x").RelPermalink }}" alt="Alipay" loading="lazy"><figcaption>支付宝 Alipay</figcaption></figure>
+    {{ end }}{{ end -}}
+  </div>
+  <div class="tip-links">
+    {{- with $t.paypal }}<a href="{{ . }}" target="_blank" rel="noopener">PayPal</a>{{ end -}}
+    {{- with $t.kofi }}<a href="{{ . }}" target="_blank" rel="noopener">Ko-fi</a>{{ end -}}
+    {{- with $t.email }}<a href="mailto:{{ . }}">Email</a>{{ end -}}
+  </div>
+</section>
+{{- end -}}

@@ -1,0 +1,12 @@
+// ================= Post tip jar =================
+.tip-jar { margin: clamp(52px, 9vw, 96px) 0 0; padding-top: clamp(32px, 5vw, 48px); border-top: 1px solid var(--hairline); text-align: center; }
+.tip-lead { font-family: $mincho-family; font-size: 1.22rem; color: var(--ink); letter-spacing: 0.05em; margin: 0 0 0.5rem; }
+.tip-sub { color: var(--ink-muted); font-size: 0.95rem; line-height: 1.7; margin: 0 auto clamp(22px, 3.5vw, 34px); max-width: 30rem; }
+.tip-sub span { display: block; font-style: italic; opacity: 0.85; margin-top: 2px; }
+.tip-methods { display: flex; justify-content: center; gap: clamp(22px, 5vw, 56px); flex-wrap: wrap; margin-bottom: clamp(20px, 3vw, 30px); }
+.tip-qr { margin: 0; }
+.tip-qr img { width: 152px; height: 152px; object-fit: contain; background: #fff; padding: 7px; border: 1px solid var(--hairline); border-radius: 6px; }
+.tip-qr figcaption { margin-top: 9px; font-family: $mincho-family; font-size: 0.86rem; color: var(--ink-muted); letter-spacing: 0.06em; }
+.tip-links { display: flex; justify-content: center; gap: clamp(16px, 3vw, 32px); flex-wrap: wrap; }
+.tip-links a { font-family: $mincho-family; font-size: 0.98rem; color: var(--ink); text-decoration: none; padding-bottom: 2px; border-bottom: 1px solid var(--bengara); transition: color 0.18s ease; }
+.tip-links a:hover { color: var(--ink); }

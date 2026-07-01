@@ -1,0 +1,26 @@
+{{- define "main" -}}
+<div class="wrapper list-page">
+    <section class="statement statement--page">
+        <div class="statement-seal" aria-hidden="true">{{ .Params.seal | default "帖" }}</div>
+        <div class="statement-body">
+            <h1 class="statement-lead statement-lead--page">{{ .Title }}</h1>
+        </div>
+    </section>
+    <main class="page-content" aria-label="Content">
+        {{ range .Pages.GroupByDate "2006" }}
+        {{ $year := .Key }}
+        <h2 class="post-year">{{ $year }}</h2>
+
+        {{/* create a list of posts for each month, with month as heading */}}
+
+        {{ range .Pages }}
+
+        {{ partial "postCard" . }}
+
+        {{ end }} {{/* end range .Pages */}}
+
+        {{ end }} {{/* end range .Pages.GroupByDate "2006" */}}
+
+    </main>
+</div>
+{{- end -}}

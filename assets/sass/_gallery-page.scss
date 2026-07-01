@@ -1,0 +1,11 @@
+// ================= Gallery page =================
+.wrapper.gallery-page { max-width: 900px; }
+.gallery-intro { text-align: center; color: var(--ink-muted); margin: 0 auto clamp(44px, 8vw, 80px); max-width: 36rem; }
+.gallery-grid { display: flex; flex-direction: column; gap: clamp(60px, 10vw, 116px); }
+.gal-item { margin: 0; }
+.gal-item a, .gal-item img { display: block; }
+.gal-item img { width: 100%; height: auto; border-radius: 3px; border: 1px solid var(--hairline); }
+.gal-cap { margin-top: clamp(15px, 2.2vw, 22px); text-align: center; }
+.gal-title { display: block; font-family: $display-family; font-style: italic; font-size: 1.32rem; color: var(--ink); letter-spacing: 0.01em; }
+.gal-meta { display: block; font-family: $mincho-family; font-style: italic; font-size: 0.86rem; color: var(--ink-faint); letter-spacing: 0.09em; margin-top: 5px; }
+.gal-desc { display: block; font-family: $serif-body; font-style: italic; font-size: 1rem; line-height: 1.75; color: var(--ink-muted); margin: 12px auto 0; max-width: 38rem; }

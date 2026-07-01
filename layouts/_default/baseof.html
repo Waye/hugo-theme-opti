@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}">
+    {{- partial "head.html" . -}}
+    <body data-theme="{{ .Site.Params.defaultColor }}" class="notransition{{ with .Params.accent }} accent-{{ . }}{{ end }}">
+        {{- partial "scriptsBodyStart.html" . -}}
+        <div class="page-shell">
+            <aside class="home-rail page-rail">
+                {{ partial "site-rail.html" . }}
+            </aside>
+            <div class="page-body">
+                {{- block "main" . }}{{- end }}
+                {{- partial "footer.html" . -}}
+            </div>
+        </div>
+        {{- partial "scriptsBodyEnd.html" . -}}
+    </body>
+</html>

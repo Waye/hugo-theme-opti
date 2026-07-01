@@ -1,0 +1,22 @@
+{{- $main := (where .Site.RegularPages "Type" "in" .Site.Params.mainSections).ByDate.Reverse -}}
+{{- if $main -}}
+{{- $idx := slice -}}
+{{- range $main -}}
+  {{- $idx = $idx | append (dict
+      "title" .Title
+      "tags" (.Params.tags | default slice)
+      "summary" ((.Description | default .Summary) | plainify | truncate 160)
+      "url" .RelPermalink
+      "date" (.Date.Format "Jan 2, 2006")) -}}
+{{- end -}}
+<div class="search-box" id="search-box">
+  <input type="search" id="site-search" autocomplete="off"
+         placeholder="{{ T "home.search_placeholder" | default "Search posts…" }}"
+         aria-label="Search posts">
+  <ul class="search-results" id="search-results"></ul>
+</div>
+<script>window.SEARCH_INDEX = {{ $idx }};</script>
+<script defer src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
+{{- $js := resources.Get "js/home-search.js" | minify | fingerprint -}}
+<script defer src="{{ $js.RelPermalink }}"></script>
+{{- end -}}

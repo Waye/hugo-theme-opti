@@ -1,0 +1,74 @@
+// ---- Colour-scheme picker (Nippon colours) ----
+.scheme-picker { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; max-width: 116px; }
+
+// picker now lives in the footer, parallel with the socials/copyright on every page
+.footer-scheme { display: flex; justify-content: center; margin: 0 0 clamp(20px, 3vw, 32px); }
+.footer-scheme .scheme-picker { max-width: none; }
+.home-stack .footer-scheme { justify-content: flex-start; }
+.scheme-swatch {
+  width: 14px; height: 14px; padding: 0; border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--line) 30%, transparent);
+  background: var(--sw); cursor: pointer; opacity: 0.72;
+  transition: opacity 0.18s ease, transform 0.14s ease, box-shadow 0.18s ease;
+}
+.scheme-swatch:hover { opacity: 1; transform: scale(1.16); }
+.scheme-swatch.is-active { opacity: 1; box-shadow: 0 0 0 2px var(--washi), 0 0 0 3px var(--line); }
+.sw-entan { --sw: #d75455; } .sw-mushikuri { --sw: #d9cd90; } .sw-baikocha { --sw: #89916b; }
+.sw-tsuyukusa { --sw: #2ea9df; } .sw-noshimehana { --sw: #2b5f75; }
+.sw-kenpohzome { --sw: #43341b; } .sw-kurotsurubami { --sw: #0b1013; }
+
+// custom colour picker swatch (rainbow → opens native colour input)
+.scheme-custom {
+  position: relative; overflow: hidden; padding: 0; opacity: 0.85;
+  background: conic-gradient(from 200deg, #d75455, #d9cd90, #2ea9df, #2b5f75, #43341b, #d75455);
+  border: 1px solid color-mix(in srgb, var(--line) 30%, transparent);
+}
+.scheme-custom:hover { opacity: 1; transform: scale(1.16); }
+.scheme-custom input[type="color"] {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  opacity: 0; border: none; padding: 0; margin: 0; cursor: pointer;
+}
+
+// ---- Section-opening seals (帖 / 旅 / 廊 / 記 / 最新) in red ----
+.statement-seal,
+.sec-mincho { color: #bc0022; }
+
+// ================= Rail brand + colour name — vertical NIPPON-COLORS style =================
+.rail-top { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; }
+
+.rail-logo { display: flex; flex-direction: column; align-items: center; gap: 15px; text-decoration: none; }
+.rail-dot {
+  width: clamp(60px, 7.4vw, 86px); height: clamp(60px, 7.4vw, 86px);
+  border-radius: 50%; background: #bc0022; display: block;
+}
+.rail-brand {
+  writing-mode: vertical-rl; text-orientation: sideways;
+  font-family: "Helvetica Neue", "Hiragino Sans", "PingFang SC", Arial, sans-serif;
+  font-weight: 800; font-size: clamp(0.74rem, 0.92vw, 0.86rem);
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--ink); white-space: nowrap;
+  transition: opacity 0.18s ease;
+}
+.rail-logo:hover .rail-brand { opacity: 0.72; }
+
+.rail-colorname { display: flex; flex-direction: column; align-items: center; margin-top: 16px; margin-bottom: clamp(22px, 4vh, 42px); }
+.cn-kanji {
+  writing-mode: vertical-rl; text-orientation: upright;
+  font-family: $mincho-family; font-size: clamp(1.52rem, 1.95vw, 1.78rem);
+  color: var(--ink); line-height: 1.04;
+}
+.cn-romaji {
+  margin-top: 13px;
+  font-family: $display-family; font-size: clamp(0.66rem, 0.82vw, 0.76rem);
+  font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--ink);
+}
+
+@include media-query($on-mobile) {
+  .rail-colorname { display: none; }
+  .scheme-picker { max-width: none; }
+  .rail-top { align-items: flex-start; }
+  .rail-logo { flex-direction: row; align-items: center; gap: 12px; }
+  .rail-brand { writing-mode: horizontal-tb; text-orientation: mixed; }
+  .rail-dot { width: 42px; height: 42px; }
+}

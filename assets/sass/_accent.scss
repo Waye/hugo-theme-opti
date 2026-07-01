@@ -1,0 +1,6 @@
+// ===== Per-page background tint = matching category block colour =====
+// Set `accent: bengara | ai | koke` in a page's front matter (or via cascade).
+html body.accent-bengara { background-color: color-mix(in srgb, var(--bengara) 11%, var(--washi)); }
+html body.accent-ai      { background-color: color-mix(in srgb, var(--ai) 11%, var(--washi)); }
+html body.accent-koke    { background-color: color-mix(in srgb, var(--koke) 12%, var(--washi)); }
+html body.accent-kincha  { background-color: color-mix(in srgb, var(--kincha) 12%, var(--washi)); }

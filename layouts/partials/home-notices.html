@@ -1,0 +1,29 @@
+{{- $items := slice -}}
+{{- with .Site.Data.notices -}}
+  {{- range . -}}
+    {{- $items = $items | append (dict "date" .date "text" .text) -}}
+  {{- end -}}
+{{- else -}}
+  {{- $posts := (where $.Site.RegularPages "Type" "in" $.Site.Params.mainSections).ByDate.Reverse -}}
+  {{- range first 4 $posts -}}
+    {{- $items = $items | append (dict "date" (.Date.Format "2006.01.02") "text" .Title) -}}
+  {{- end -}}
+{{- end -}}
+{{- if $items -}}
+{{- $title := .Site.Params.noticeTitle | default "新着情報" -}}
+<section class="notices" aria-label="Updates">
+  <div class="notices-head">
+    <div class="notices-title" aria-hidden="true">
+      {{- range (split $title "") -}}<span class="nt-box">{{ . }}</span>{{- end -}}
+    </div>
+  </div>
+  <ol class="notices-list">
+    {{- range $items -}}
+    <li class="notice-row">
+      <time class="notice-date">{{ .date }}</time>
+      <span class="notice-text">{{ .text }}</span>
+    </li>
+    {{- end -}}
+  </ol>
+</section>
+{{- end -}}
